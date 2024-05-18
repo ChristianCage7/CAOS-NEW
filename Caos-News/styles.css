@@ -8,30 +8,29 @@ body {
 }
 
 .container {
-    flex: 1;  /* Esto hace que el contenedor tome todo el espacio disponible, empujando el footer hacia abajo */
-    flex-direction: column;
-    margin-top: 120px;
-    margin-bottom: 120px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .content {
     flex: 1;
+    display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
-    margin-top: 115px;
-    margin-left: 200px;
-    margin-right: 200px;
+    justify-content: center;
+    margin: 130px 200px 50px 200px;  /* Margen superior, inferior, izquierdo y derecho */
 }
+
 .titulosNoticias {
     text-align: center;
 }
+
 .titulos {
     text-align: center;
 }
 
 /* Estilos index y carrusel */
 .carousel {
-    max-width: 80%; /* Reducido de 90% a 80% para dar más espacio al margen izquierdo */
+    max-width: 100%;
     height: 500px; /* Altura fija */
     margin: 50px auto 0 auto; /* Ajuste en márgenes para centrar correctamente */
 }
@@ -57,12 +56,11 @@ h5 {
 /* Estilos quiénes somos */
 .cargos,
 .nombres {
-    text-align: center;
-    /* Centra el texto */
+    text-align: center; /* Centra el texto */
 }
 
 #separator {
-    margin: 24px 0px 24px 0px;
+    margin: 24px 0px;
 }
 
 .cargos {
@@ -73,8 +71,7 @@ h5 {
 
 /* Estilos para los títulos de los planes */
 .card-title {
-    background-color: transparent;
-    /* Quita el color de fondo */
+    background-color: transparent; /* Quita el color de fondo */
 }
 
 /* Estilo Noticia */
@@ -102,7 +99,7 @@ h5 {
     text-align: center;
     padding: 20px 0;
     font-size: x-small;
-    max-height: 100%;
+    width: 100%;
 }
 
 /* Estilo API Clima */
@@ -143,10 +140,12 @@ h5 {
 
 #chile-icon {
     margin-bottom: 1rem; /* Espacio entre la imagen y la hora */
+    max-width: 100%;
+    height: auto;
 }
 
 #hora-santiago {
-    font-size: 2rem; /* Tamaño grande para la hora */
+    font-size: larger; /* Tamaño grande para la hora */
     font-weight: bold; /* Negrita */
     text-align: center; /* Centrar el texto */
     margin: 0.5rem 0; /* Márgenes superiores e inferiores */

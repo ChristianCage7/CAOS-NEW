@@ -10,8 +10,8 @@
       const navbarHTML = `
       <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
           <div class="container-fluid">
-              <a class="navbar-brand" href="index.html">
-                  <img src="img/logopeque.png" alt="Logo" width="140" height="80" class="d-inline-block align-text-top">
+              <a class="navbar-brand" href="/index.html">
+                  <img src="/img/logopeque.png" alt="Logo" width="140" height="80" class="d-inline-block align-text-top">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -169,7 +169,7 @@
         var footerHTML = `
           <footer class="footer bg-dark text-center py-3">
             <div class="container">
-              <img src="img/logoblancotrans.png" alt="Logo" width="250" height="150">
+              <img src="/img/logoblancotrans.png" alt="Logo" width="250" height="150">
               <br>
               Todos los derechos reservados.
             </div>
@@ -186,19 +186,11 @@
       var navbar = document.querySelector(".navbar");
       var navbarBrand = document.querySelector(".navbar-brand img");
     
-      function adjustNavbar() {
-        if (window.pageYOffset > 100) {
-          navbar.classList.add("navbar-shrink");
-          navbarBrand.style.height = "60px"; // Cambiar el tamaño del logo
-        } else {
-          navbar.classList.remove("navbar-shrink");
-          navbarBrand.style.height = "80px"; // Tamaño original del logo
-        }
-      }
     
       // Añadir la clase y ajustar el tamaño del logo al hacer scroll
       window.addEventListener("scroll", adjustNavbar);
     });
     
     })();
+    
     
