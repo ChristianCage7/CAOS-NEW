@@ -1,0 +1,197 @@
+{% extends 'caosNewsApp/base.html' %}
+{% load static %}
+
+{% block content %}
+  <title>Planes</title>
+
+  <!-- CONTENIDO SUSCRIBIRSE -->
+  <div class="content">
+    <div class="container">
+      <h1 class="titulos">¡Suscríbete ahora!</h1>
+      <br />
+      <!-- Contenedores para los planes de suscripción -->
+      <div class="row">
+        <div class="col-md-4">
+          <!-- Plan de suscripción izquierdo -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Plan Básico</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cartModal">Suscribirse</button>
+              <!-- Carro compras Básico -->
+              <div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                      <h4 class="modal-title" id="exampleModalLabel">Detalle Compra</h4>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-image">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Duración</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="w-25">
+                              <img src="{% static 'img/Basico.png' %}" class="img-fluid img-thumbnail" alt="Sheep" />
+                            </td>
+                            <td>Plan Básico</td>
+                            <td>$4.990</td>
+                            <td>Mensual</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="d-flex justify-content-end">
+                        <h4>Total: <span class="price text-success">$4.990</span></h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-between">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-danger">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Plan de suscripción central -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Plan Estándar</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cartModal2">Suscribirse</button>
+              <!-- Carro compras Estándar -->
+              <div class="modal fade" id="cartModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                      <h4 class="modal-title" id="exampleModalLabel">Detalle Compra</h4>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-image">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Duración</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="w-25">
+                              <img src="{% static 'img/Estandar.png' %}" class="img-fluid img-thumbnail" alt="Sheep" />
+                            </td>
+                            <td>Plan Estandar</td>
+                            <td>$12.990</td>
+                            <td>Trimestral</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="d-flex justify-content-end">
+                        <h4>Total: <span class="price text-success">$12.990</span></h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-between">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-danger">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Plan de suscripción derecho -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Plan Premium</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cartModal3">Suscribirse</button>
+              <!-- Carro compras premium -->
+              <div class="modal fade" id="cartModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                      <h4 class="modal-title" id="exampleModalLabel">Detalle Compra</h4>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-image">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Duración</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="w-25">
+                              <img src="{% static 'img/Premium.png' %}" class="img-fluid img-thumbnail" alt="Sheep" />
+                            </td>
+                            <td>Plan Premium</td>
+                            <td>$25.990</td>
+                            <td>Anual</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="d-flex justify-content-end">
+                        <h4>Total: <span class="price text-success">$25.990</span></h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-between">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-danger">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popover Título de despedida -->
+      <div class="text-center my-5">
+        <h2 class="titulos">¡Gracias por considerarnos!</h2>
+        <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-html="true" data-bs-content="Para más información, diríjase a nuestro <a href='{% url 'quienes_somos' %}' target='_blank'>formulario de contacto</a>">¿Necesitas ayuda? ¡Haz clic aquí!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div id="footer-container"></div>
+  </footer>
+
+  <!-- JavaScript para llamar dinámicos -->
+  <script src="/JavaScript/dinámico.js"></script>
+  <script src="/JavaScript/validación.js"></script>
+
+  <!-- Inicialización del popover -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        var popover = new bootstrap.Popover(popoverTriggerEl)
+        popoverTriggerEl.addEventListener('shown.bs.popover', function () {
+          var popoverId = popoverTriggerEl.getAttribute('aria-describedby')
+          var popoverElement = document.getElementById(popoverId)
+          var link = popoverElement.querySelector('a')
+          link.addEventListener('click', function (e) {
+            window.location.href = link.getAttribute('href')
+          })
+        })
+        return popover
+      })
+    })
+  </script>
+{% endblock %}

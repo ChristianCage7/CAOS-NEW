@@ -1,0 +1,90 @@
+{% extends 'caosNewsApp/base.html' %}
+{% load static %}
+
+{% block content %}
+  <title>¿Quiénes somos?</title>
+
+  <!-- CONTENIDO QUIENES SOMOS -->
+  <div class="content">
+    <div class="container">
+      <h1 class="titulos">Quiénes Somos</h1>
+      <hr id="separator" />
+      <h2 class="cargos">Director:</h2>
+      <p class="nombres">Yarod Nick Aliaga Barraza</p>
+      <h2 class="cargos">Director de audiencias y plataformas</h2>
+      <p class="nombres">Christian Andrés Andrade Gómez</p>
+      <h2 class="cargos">Gerente General y Representante legal</h2>
+      <p class="nombres">Martín Ignacio Sepúlveda Torres</p>
+      <h2 class="cargos">Editor:</h2>
+      <p class="nombres">Ignacio Andrés Cuturrufo Gónzales</p>
+      <h2 class="cargos">Razón Social:</h2>
+      <p class="nombres">Caos S.A.</p>
+      <!-- Botón secundario para abrir el modal -->
+      <div class="text-center mb-4">
+        <a name="contacto"></a>
+        <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</button>
+      </div>
+
+      <!-- Modal para el formulario de contacto -->
+      <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              Formulario de contacto
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="contactForm" novalidate>
+                <div class="mb-3">
+                  <label for="rutInput" class="form-label">Rut</label>
+                  <input type="text" class="form-control" id="rutInput" required />
+                  <div class="invalid-feedback" id="rutFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="nombreInput" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombreInput" required />
+                  <div class="invalid-feedback" id="nombreFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="edadInput" class="form-label">Edad</label>
+                  <input type="number" class="form-control" id="edadInput" required />
+                  <div class="invalid-feedback" id="edadFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="generoSelect" class="form-label">Género</label>
+                  <select class="form-select" id="generoSelect" required>
+                    <option value=""></option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                  <div class="invalid-feedback" id="generoFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="celularInput" class="form-label">Celular</label>
+                  <input type="number" class="form-control" id="celularInput" required />
+                  <div class="invalid-feedback" id="celularFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="correoInput" class="form-label">Correo</label>
+                  <input type="email" class="form-control" id="correoInput" required />
+                  <div class="invalid-feedback" id="correoFeedback"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="mensajeTextArea" class="form-label">Mensaje</label>
+                  <textarea class="form-control" id="mensajeTextArea" rows="3" maxlength="300" required></textarea>
+                  <small id="charCount" class="form-text text-muted">Caracteres restantes: 300</small>
+                  <div class="invalid-feedback" id="mensajeFeedback"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="{% static 'JavaScript/formulario_contacto.js' %}"></script>
+{% endblock %}
