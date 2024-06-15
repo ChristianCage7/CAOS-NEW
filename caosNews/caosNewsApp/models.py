@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class Registrar(models.Model):
+class Usuarios(models.Model):
     id_usuario = models.AutoField(db_column='id_usuario', primary_key=True)
     nombre = models.CharField(db_column='nombre', max_length=20, blank=False, null=False)
     apellido = models.CharField(db_column='apellido', max_length=20, blank=False, null=False)
     email = models.EmailField(db_column='email', max_length=100, blank=False, null=False, unique=True)
     password = models.CharField(db_column='password', max_length=20, blank=False, null=False)
-
+    estado = models.IntegerField(db_column='estado', choices=[(0, 'Inactivo'), (1, 'Activo')], default=1)
     def __str__(self):
         return str(self.nombre)+" "+str(self.apellido)
 
@@ -17,11 +17,11 @@ class Noticia(models.Model):
     titulo = models.CharField(db_column='titulo', max_length=100, blank=False, null=False)
     cuerpo = models.CharField(db_column='cuerpo', max_length=500, blank=False, null=False)
     fecha = models.DateField(db_column='fecha',blank=False, null=False)  
-    id_usuario = models.ForeignKey('Registrar',on_delete=models.CASCADE, db_column='id_usuario')
+    id_usuario = models.ForeignKey('Usuarios',on_delete=models.CASCADE, db_column='id_usuario')
     ubicacion = models.CharField(db_column='ubicacion', max_length=50, blank=False, null=False)
     categoria = models.ForeignKey('Categoria',on_delete=models.CASCADE, db_column='categoria') 
     imagen = models.BooleanField(db_column='imagen',null=True)
-
+    estado = models.IntegerField(db_column='estado', choices=[(0, 'Inactivo'), (1, 'Activo')], default=1)
     def __str__(self):
         return str(self.titulo)
     
