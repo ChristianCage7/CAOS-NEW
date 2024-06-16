@@ -15,5 +15,9 @@
   }, false);
 })();
 
-
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
+      $('.alert').alert('close');
+  }, 3000);  // Cierra las alertas después de 3000 milisegundos = 3 segundos
+});
 

@@ -1,8 +1,43 @@
 {% extends 'caosNewsApp/base.html' %}
-{% load static %}
 
 {% block content %}
-
-
-
+<div class="container">
+    <a href="{% url 'usuarios_add' %}" class="btn btn-success mb-3">Agregar Usuario</a>
+    <h2>Usuarios Registrados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id_usuario }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.get_estado_display }}</td>
+                <td>
+                    <a href="{% url 'usuarios_edit' pk=usuario.id_usuario %}" class="btn btn-primary">Editar</a>
+                    <!-- Formulario de eliminación para cada usuario -->
+                    <form action="{% url 'usuarios_eliminar' usuario.id_usuario %}" method="post" style="display: inline-block;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar este usuario?');">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay usuarios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
