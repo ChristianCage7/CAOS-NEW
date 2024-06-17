@@ -100,16 +100,7 @@
     </footer>
     <script src="{% static 'JavaScript/validación.js' %}"></script>
 
-    {% if messages %}
-    <div class="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050;">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
+
     
 
 </body>
