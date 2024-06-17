@@ -33,12 +33,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'quienes_somos' %}">¿Quiénes somos?</a>
                     </li>
+              <!-- Administrador -->
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Administrador
                       </a>
                       <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'crud' %}">Gestión de Usuario</a></li>
+                          <li><a class="dropdown-item" href="{% url 'crud_usuario' %}">Gestión de Usuario</a></li>
+                          <li><a class="dropdown-item" href="{% url 'crud_noticia' %}">Gestión de Noticia</a></li>
                       </ul>
                   </li>                    
                 </ul>

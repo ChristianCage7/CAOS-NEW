@@ -1,0 +1,61 @@
+{% extends 'caosNewsApp/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Agregar Noticia</h2>
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.titulo.label_tag }}
+            {{ form.titulo }}
+            <div class="invalid-feedback">
+                Por favor ingresa un título válido.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.cuerpo.label_tag }}
+            {{ form.cuerpo }}
+            <div class="invalid-feedback">
+                Por favor ingresa el contenido de la noticia.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.fecha.label_tag }}
+            {{ form.fecha }}
+            <div class="invalid-feedback">
+                Por favor selecciona una fecha.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.imagen.label_tag }}
+            {{ form.imagen }}
+            <div class="invalid-feedback">
+                Por favor selecciona una imagen válida.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.categoria.label_tag }}
+            {{ form.categoria }}
+            <div class="invalid-feedback">
+                Por favor selecciona una categoría.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.id_usuario.label_tag }}
+            {{ form.id_usuario }}
+            <div class="invalid-feedback">
+                Por favor selecciona un usuario.
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.ubicacion.label_tag }}
+            {{ form.ubicacion }}
+            <div class="invalid-feedback">
+                Por favor ingresa una ubicación válida.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'crud_noticia' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
