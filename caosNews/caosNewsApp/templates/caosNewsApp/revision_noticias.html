@@ -1,0 +1,45 @@
+{% extends 'caosNewsApp/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Revisión de Noticia</h1>
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control" value="{{ noticia.titulo }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Autor</label>
+            <input type="text" class="form-control" value="{{ noticia.id_usuario }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="text" class="form-control" value="{{ noticia.fecha|date:'Y-m-d' }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ubicación</label>
+            <input type="text" class="form-control" value="{{ noticia.ubicacion }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <input type="text" class="form-control" value="{{ noticia.categoria.categoria }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cuerpo</label>
+            <textarea class="form-control" rows="5" readonly>{{ noticia.cuerpo }}</textarea>
+        </div>
+        <div class="mb-3">
+            {% if noticia.imagen %}
+            <img src="{{ noticia.imagen.url }}" alt="Imagen de Noticia" class="img-fluid">
+            {% else %}
+            <p>No hay imagen disponible.</p>
+            {% endif %}
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'crud_noticia' %}" class="btn btn-secondary">Volver</a>
+            <button type="button" class="btn btn-success">Aprobar</button>
+            <button type="button" class="btn btn-danger">Rechazar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

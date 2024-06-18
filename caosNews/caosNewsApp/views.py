@@ -114,6 +114,7 @@ def noticias_add(request):
         form = NoticiaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Noticia agregada exitosamente.")
             return redirect('crud_noticia')
     else:
         form = NoticiaForm()
@@ -133,3 +134,7 @@ def noticias_eliminar(request, pk):
         messages.success(request, "Noticia eliminada con éxito.")
         return redirect('crud_noticia')
     return redirect('crud_noticia')
+
+def revision_noticias(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    return render(request, 'caosNewsApp/revision_noticias.html', {'noticia': noticia})

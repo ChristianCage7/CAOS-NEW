@@ -1,5 +1,5 @@
 from django import forms
-from .models import Noticia
+from .models import Noticia, Usuarios
 
 class NoticiaForm(forms.ModelForm):
     class Meta:
@@ -14,3 +14,8 @@ class NoticiaForm(forms.ModelForm):
             'id_usuario': forms.Select(attrs={'class': 'form-select'}),
             'ubicacion': forms.TextInput(attrs={'class': 'form-control'})
         }
+
+    def __init__(self, *args, **kwargs):
+        super(NoticiaForm, self).__init__(*args, **kwargs)
+        # Actualizar el queryset para el campo id_usuario
+        self.fields['id_usuario'].queryset = Usuarios.objects.filter(estado=1)

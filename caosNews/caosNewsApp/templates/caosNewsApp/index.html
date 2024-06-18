@@ -2,71 +2,61 @@
 {% load static %}
 
 {% block content %}
-  <title>CAOS NEWS</title>
-  <!-- CARRUSEL -->
+<div class="container mt-4">
+    <h1 class="text-center mb-4">NOTICIAS DESTACADAS</h1>
+    <div class="row align-items-start">
+        <!-- API Clima -->
+        <div class="col-md-2">
+            <div class="api-clima">
+                <h2>Clima actual en Chile</h2>
+                <img id="icono-clima" src="" alt="" style="display: none;">
+                <div id="clima"></div>
+            </div>
+        </div>
 
-  <div class="container">
-    <div class="content">
-      <h1 class="titulos">NOTICIAS DESTACADAS</h1>
-      <div class="row">
-        <div class="col-sm-">
-          <!-- API CLIMA -->
-          <div class="api-clima">
-            <h2>Clima actual en Chile</h2>
-            <img id="icono-clima" src="" alt="" style="display: none;" />
-            <div id="clima"></div>
-          </div>
-        </div>
-        <div class="col-lg-">
-          <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <a href="{% url 'noticia_carrusel_1' %}"><img src="{% static 'img/SonicNew.jpg' %}" class="d-block w-100" alt="Sonic el erizo" /></a>
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>TÍTULO NOTICIA</h5>
+        <!-- Carrusel Central -->
+        <div class="col-md-8">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="{% url 'noticia_carrusel_1' %}"><img src="{% static 'img/SonicNew.jpg' %}" class="d-block w-100" alt="Sonic el erizo" /></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>TÍTULO NOTICIA</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="{% url 'noticia_carrusel_2' %}"><img src="{% static 'img/niñas.png' %}" class="d-block w-100" alt="Niñas negras" /></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>TÍTULO NOTICIA</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="{% url 'noticia_carrusel_3' %}"><img src="{% static 'img/perrito.jpg' %}" class="d-block w-100" alt="Perrito muy lindo" /></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>TÍTULO NOTICIA</h5>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="carousel-item">
-                <a href="{% url 'noticia_carrusel_2' %}"><img src="{% static 'img/niñas.png' %}" class="d-block w-100" alt="Niñas negras" /></a>
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>TÍTULO NOTICIA</h5>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <a href="{% url 'noticia_carrusel_3' %}"><img src="{% static 'img/perrito.jpg' %}" class="d-block w-100" alt="Perrito muy lindo" /></a>
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>TÍTULO NOTICIA</h5>
-                </div>
-              </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
         </div>
-        <br />
-        <div class="col-sm-">
-          <div class="api-hora">
-            <!-- API HORA -->
-            <div id="timezone-container">
-              <h2>Hora actual en Chile</h2>
-              <img id="chile-icon" src="{% static 'img/chileIcon.png' %}" alt="Icono de chile" />
-              <div id="hora-santiago"></div>
+
+        <!-- API Hora -->
+        <div class="col-md-2">
+            <div class="api-hora">
+                <h2>Hora actual en Chile</h2>
+                <img id="chile-icon" src="{% static 'img/chileIcon.png' %}" alt="Icono de chile" style="display: block;">
+                <div id="hora-santiago"></div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <script src="{% static 'JavaScript/api.js' %}"></script>
+</div>
+<script src="{% static 'JavaScript/api.js' %}"></script>
 {% endblock %}

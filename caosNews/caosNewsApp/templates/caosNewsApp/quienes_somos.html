@@ -2,32 +2,36 @@
 {% load static %}
 
 {% block content %}
-  <title>¿Quiénes somos?</title>
+<div class="container mt-3">  <!-- Reducido el margen superior -->
+    <h1 class="titulos text-center">Quiénes Somos</h1>
+    <hr id="separator" />
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="cargos">Director:</h2>
+            <p class="nombres">Yarod Nick Aliaga Barraza</p>
+            <h2 class="cargos">Director de audiencias y plataformas</h2>
+            <p class="nombres">Christian Andrés Andrade Gómez</p>
+            <h2 class="cargos">Gerente General y Representante legal</h2>
+            <p class="nombres">Martín Ignacio Sepúlveda Torres</p>
+            <h2 class="cargos">Editor:</h2>
+            <p class="nombres">Ignacio Andrés Cuturrufo Gonzales</p>
+            <h2 class="cargos">Razón Social:</h2>
+            <p class="nombres">Caos S.A.</p>
+        </div>
+    </div>
 
-  <!-- CONTENIDO QUIENES SOMOS -->
-  <div class="content">
-    <div class="container">
-      <h1 class="titulos">Quiénes Somos</h1>
-      <hr id="separator" />
-      <h2 class="cargos">Director:</h2>
-      <p class="nombres">Yarod Nick Aliaga Barraza</p>
-      <h2 class="cargos">Director de audiencias y plataformas</h2>
-      <p class="nombres">Christian Andrés Andrade Gómez</p>
-      <h2 class="cargos">Gerente General y Representante legal</h2>
-      <p class="nombres">Martín Ignacio Sepúlveda Torres</p>
-      <h2 class="cargos">Editor:</h2>
-      <p class="nombres">Ignacio Andrés Cuturrufo Gónzales</p>
-      <h2 class="cargos">Razón Social:</h2>
-      <p class="nombres">Caos S.A.</p>
-      <!-- Botón secundario para abrir el modal -->
-      <div class="text-center mb-4">
-        <a name="contacto"></a>
+    <!-- Botón y modal para contacto -->
+    <div class="text-center mt-4 mb-4">
         <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</button>
-      </div>
+    </div>
 
-      <!-- Modal para el formulario de contacto -->
-      <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Formulario de contacto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
           <div class="modal-content">
             <div class="modal-header">
               Formulario de contacto
