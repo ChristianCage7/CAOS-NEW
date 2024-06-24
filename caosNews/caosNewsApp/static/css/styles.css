@@ -3,9 +3,8 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    /* Asegúrate de que no haya márgenes externos afectando la disposición */
+    min-height: 130vh;
+    margin: 20px;
 }
 
 .container {
@@ -39,7 +38,6 @@ body {
 .carousel {
     max-width: 100%;
     height: 500px;
-    /* Altura fija */
     margin: 50px auto 0 auto;
     /* Ajuste en márgenes para centrar correctamente */
 }
@@ -181,4 +179,14 @@ h5 {
     /* Centrar el texto */
     margin: 0.5rem 0;
     /* Márgenes superiores e inferiores */
+}
+
+/* Mensaje de alerta */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    opacity: 0.9;
+    transition: opacity 0.6s ease-out;
 }

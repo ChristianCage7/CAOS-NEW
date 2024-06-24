@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
@@ -9,123 +9,136 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-</head>
-<body class="d-flex flex-column min-vh-100">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{% static 'img/logopeque.png' %}" alt="Logo" width="140" height="80" />
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'cat_politica' %}">Política</a></li>
-                            <li><a class="dropdown-item" href="{% url 'cat_deportes' %}">Deporte</a></li>
-                            <li><a class="dropdown-item" href="{% url 'cat_internacional' %}">Internacional</a></li>
-                            <li><a class="dropdown-item" href="{% url 'cat_economia' %}">Economía</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'quienes_somos' %}">¿Quiénes somos?</a>
-                    </li>
-                    <!-- Administrador -->
-                    {% if request.user.is_staff %}
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Administrador
-                      </a>
-                      <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{% url 'user_list' %}">Gestión de Usuario</a></li>
-                          <li><a class="dropdown-item" href="{% url 'crud_noticia' %}">Gestión de Noticia</a></li>
-                      </ul>
-                    </li>
-                    {% endif %}
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logopeque.png' %}" alt="Logo" width="140" height="80" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="{% url 'cat_politica' %}">Política</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'cat_deportes' %}">Deporte</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'cat_internacional' %}">Internacional</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'cat_economia' %}">Economía</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'quienes_somos' %}">¿Quiénes somos?</a>
+            </li>
+            <!-- Administrador -->
+            {% if request.user.is_staff %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrador</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'user_list' %}">Gestión de Usuario</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'crud_noticia' %}">Gestión de Noticia</a>
+                  </li>
+                </ul>
+              </li>
+            {% endif %}
 
-                    <!-- Usuario -->
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Usuario
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'crud_noticia' %}">Tus noticias</a></li>
-                            <li><a class="dropdown-item" href="">Tú perfil</a></li>
-                        </ul>
-                    </li>                 
-                    {% endif %} 
+            <!-- Usuario -->
+            {% if not request.user.is_staff %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'crud_noticia' %}">Tus noticias</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="">Tú perfil</a>
+                  </li>
                 </ul>
-                <ul class="navbar-nav">
-                    {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
-                        </li>
-                    {% endif %}
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="¿Qué necesitas?" aria-label="Search" />
-                    <button class="btn btn-outline-danger" type="submit">Buscar</button>
-                </form>
-            </div>
+              </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
+              </li>
+            {% endif %}
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="¿Qué necesitas?" aria-label="Search" />
+            <button class="btn btn-outline-danger" type="submit">Buscar</button>
+          </form>
         </div>
+      </div>
     </nav>
 
     <!-- Modal para iniciar sesión -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img src="{% static 'img/logopeque.png' %}" alt="pequeño logo" width="50" />
-                    Iniciar Sesión
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{% url 'login' %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="username">Usuario</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese Usuario" required>
-                            <div class="invalid-feedback">Por favor ingrese un usuario válido.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese Contraseña" required>
-                            <div class="invalid-feedback">Por favor ingrese su contraseña.</div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ingresar</button>
-                    </form>
-                </div>
-            </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <img src="{% static 'img/logopeque.png' %}" alt="pequeño logo" width="50" />
+            Iniciar Sesión
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese Usuario" required />
+                <div class="invalid-feedback">Por favor ingrese un usuario válido.</div>
+              </div>
+              <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese Contraseña" required />
+                <div class="invalid-feedback">Por favor ingrese su contraseña.</div>
+              </div>
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
+    <!-- Mensajes de Django -->
     <div class="container mt-4 flex-grow-1" style="padding-top: 70px;">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% block content %}
-        {% endblock %}
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block content %}
+
+      {% endblock %}
     </div>
 
     <footer class="footer bg-dark text-center py-3 mt-auto">
-        <div class="container">
-            <img src="{% static 'img/logoblancotrans.png' %}" alt="Logo" width="250" height="150" />
-            <br>
-            Todos los derechos reservados.
-        </div>
+      <div class="container">
+        <img src="{% static 'img/logoblancotrans.png' %}" alt="Logo" width="250" height="150" />
+        <br />
+        Todos los derechos reservados.
+      </div>
     </footer>
     <script src="{% static 'JavaScript/validación.js' %}"></script>
-</body>
+  </body>
 </html>

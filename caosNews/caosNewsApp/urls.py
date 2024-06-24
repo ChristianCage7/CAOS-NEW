@@ -24,7 +24,7 @@ urlpatterns = [
     path('users/<int:pk>/edit/', views.user_edit, name='user_edit'),
     path('users/<int:pk>/delete/', views.user_delete, name='user_delete'),
     path('noticias_add/', views.noticias_add, name='noticias_add'),
-    path('noticias_editar/<int:pk>/', views.noticias_edit, name='noticias_edit'),
+    path('noticias/edit/<int:pk>/', views.noticias_edit, name='noticias_edit'),
     path('noticias_eliminar/<int:pk>/', views.noticias_eliminar, name='noticias_eliminar'),
     path('revision_noticias/<int:pk>/', views.revision_noticias, name='revision_noticias'),
 ]

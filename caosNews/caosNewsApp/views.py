@@ -6,6 +6,8 @@ from .form import NoticiaForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import Noticia
+from .form import NoticiaForm
 
 
 # Create your views here.
@@ -103,9 +105,14 @@ def noticias_add(request):
 def noticias_edit(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
     if request.method == 'POST':
-        # Procesar el formulario
-        return redirect('crud_noticia')
-    return render(request, 'caosNewsApp/noticias_edit.html', {'noticia': noticia})
+        form = NoticiaForm(request.POST, instance=noticia)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Noticia actualizada exitosamente.")
+            return redirect('crud_noticia')
+    else:
+        form = NoticiaForm(instance=noticia)
+    return render(request, 'caosNewsApp/noticias_edit.html', {'form': form, 'noticia': noticia})
 
 def noticias_eliminar(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
