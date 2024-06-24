@@ -33,7 +33,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'quienes_somos' %}">¿Quiénes somos?</a>
                     </li>
-              <!-- Administrador -->
+                    <!-- Administrador -->
+                    {% if request.user.is_staff %}
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Administrador
@@ -43,20 +44,31 @@
                           <li><a class="dropdown-item" href="{% url 'crud_noticia' %}">Gestión de Noticia</a></li>
                       </ul>
                     </li>
+                    {% endif %}
+
+                    <!-- Usuario -->
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Usuario
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="">Tus noticias</a></li>
+                            <li><a class="dropdown-item" href="{% url 'crud_noticia' %}">Tus noticias</a></li>
                             <li><a class="dropdown-item" href="">Tú perfil</a></li>
                         </ul>
-                    </li>                  
+                    </li>                 
+                    {% endif %} 
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="¿Qué necesitas?" aria-label="Search" />
@@ -76,19 +88,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" novalidate>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Correo electrónico</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresar email" required />
-                            <div class="invalid-feedback">Por favor ingrese un correo válido</div>
+                            <label for="username">Usuario</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese Usuario" required>
+                            <div class="invalid-feedback">Por favor ingrese un usuario válido.</div>
                         </div>
-                        <br />
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresar contraseña" required />
-                            <div class="invalid-feedback">Por favor ingrese su contraseña</div>
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese Contraseña" required>
+                            <div class="invalid-feedback">Por favor ingrese su contraseña.</div>
                         </div>
-                        <br />
                         <button type="submit" class="btn btn-primary">Ingresar</button>
                     </form>
                 </div>
@@ -97,9 +108,16 @@
     </div>
 
     <div class="container mt-4 flex-grow-1" style="padding-top: 70px;">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% block content %}
         {% endblock %}
-  </div>
+    </div>
 
     <footer class="footer bg-dark text-center py-3 mt-auto">
         <div class="container">
@@ -109,9 +127,5 @@
         </div>
     </footer>
     <script src="{% static 'JavaScript/validación.js' %}"></script>
-
-
-    
-
 </body>
 </html>

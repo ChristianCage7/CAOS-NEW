@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .form import NoticiaForm
 from .models import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
+
 # Create your views here.
 
 def index(request):
@@ -13,8 +17,13 @@ def base(request):
     return render(request, 'caosNewsApp/base.html')
 
 def crud_noticia(request):
-    noticias = Noticia.objects.filter(estado=1) 
-    return render(request, 'caosNewsApp/crud_noticia.html', {'noticias': noticias})
+    if request.user.is_staff:
+        noticias = Noticia.objects.filter(estado=1)
+        title = "Moderación de Noticias"
+    else:
+        noticias = Noticia.objects.filter(estado=1, usuario=request.user)
+        title = "Tus Noticias"
+    return render(request, 'caosNewsApp/crud_noticia.html', {'noticias': noticias, 'title': title})
 
 
 def noticia_carrusel_1(request):
@@ -109,3 +118,31 @@ def noticias_eliminar(request, pk):
 def revision_noticias(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
     return render(request, 'caosNewsApp/revision_noticias.html', {'noticia': noticia})
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')  
+        else:
+            messages.error(request, 'Correo electrónico o contraseña incorrectos')
+    return render(request, 'base.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')
+
+def user_edit(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Usuario actualizado exitosamente.")
+            return redirect('user_list')
+    else:
+        form = UserChangeForm(instance=user)
+    return render(request, 'caosNewsApp/user_edit.html', {'form': form, 'user': user})

@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.decorators import user_passes_test
+
+admin_view = user_passes_test(lambda u: u.is_superuser or u.is_staff)(admin.site.urls)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/', admin_view, name='admin'),
     path('', include('caosNewsApp.urls')),
-
 ]
