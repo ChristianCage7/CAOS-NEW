@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .form import NoticiaForm
 from .models import *
 # Create your views here.
@@ -9,11 +11,6 @@ def index(request):
 
 def base(request):
     return render(request, 'caosNewsApp/base.html')
-
-def crud_usuario(request):
-    usuarios = Usuarios.objects.filter(estado=1)  # Mostrar solo usuarios activos
-    print("Usuarios cargados:", usuarios)  # Debug para ver qué datos se están cargando
-    return render(request, 'caosNewsApp/crud_usuario.html', {'usuarios': usuarios})
 
 def crud_noticia(request):
     noticias = Noticia.objects.filter(estado=1) 
@@ -50,64 +47,38 @@ def planes(request):
 def form_noticia(request):
     return render(request, 'caosNewsApp/form_noticia.html')
 
-def usuarios_add(request):
-    if request.method != "POST":
-        return render(request, 'caosNewsApp/usuarios_add.html')
-    else:
-        nombre=request.POST["nombre"]
-        apellido=request.POST["apellido"]
-        email=request.POST["email"]
-        password=request.POST["password"]
-        estado="1"
-        
-        newUsuario= Usuarios.objects.create(nombre=nombre,
-                                            apellido=apellido,
-                                            email=email,
-                                            password=password,
-                                            estado=1)
-        newUsuario.save()
-        messages.success(request, "Usuario agregado exitosamente.")
-        return redirect('crud_usuario')
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'caosNewsApp/user_list.html', {'users': users})
 
-
-def usuarios_eliminar(request, id_usuario):
+def user_add(request):
     if request.method == 'POST':
-        usuario = get_object_or_404(Usuarios, pk=id_usuario)
-        usuario.estado = 0  # Cambiar el estado a inactivo
-        usuario.save()  # Guardar el cambio en la base de datos
-        messages.success(request, "Usuario desactivado exitosamente.")
-        return redirect('crud_usuario')
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Usuario agregado exitosamente.")
+            return redirect('user_list')
     else:
-        messages.error(request, "Método no permitido.")
-        return redirect('crud_usuario')
+        form = UserCreationForm()
+    return render(request, 'caosNewsApp/user_add.html', {'form': form})
 
-def usuarios_edit(request, pk):
-    # Obtener el usuario por ID o mostrar un error 404 si no existe
-    usuario = get_object_or_404(Usuarios, pk=pk, estado=1)  # Asegura que el usuario esté activo
-
-    if request.method == "POST":
-        # Recuperar la información desde el formulario
-        nombre = request.POST.get("nombre")
-        apellido = request.POST.get("apellido")
-        email = request.POST.get("email")
-        password = request.POST.get("password")  # Considera manejar la contraseña de manera segura
-
-        # Actualizar los datos del usuario
-        usuario.nombre = nombre
-        usuario.apellido = apellido
-        usuario.email = email
-        if password:  # Actualiza la contraseña solo si se proporciona una nueva
-            usuario.password = password
-        
-        usuario.save()  # Guardar los cambios en la base de datos
-        messages.success(request, "Usuario actualizado exitosamente.")
-        return redirect('crud_usuario')
+def user_edit(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Usuario actualizado exitosamente.")
+            return redirect('user_list')
     else:
-        # Renderizar la página con los datos actuales del usuario para editarlos
-        context = {
-            'usuario': usuario
-        }
-        return render(request, 'caosNewsApp/usuarios_edit.html', context)
+        form = UserChangeForm(instance=user)
+    return render(request, 'caosNewsApp/user_edit.html', {'form': form, 'user': user})
+
+def user_delete(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    messages.success(request, "Usuario eliminado con éxito.")
+    return redirect('user_list') 
 
 def noticias_add(request):
     if request.method == 'POST':

@@ -1,0 +1,13 @@
+{% extends 'caosNewsApp/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Editar Usuario</h2>
+    <form action="{% url 'user_edit' user.id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary">Volver</a>
+    </form>
+</div>
+{% endblock %}

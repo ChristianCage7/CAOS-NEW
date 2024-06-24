@@ -1,0 +1,14 @@
+{% extends 'caosNewsApp/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Registrar Usuario</h2>
+    <br>
+    <form action="{% url 'user_add' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Agregar</button>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary">Volver</a>
+    </form>
+</div>
+{% endblock %}

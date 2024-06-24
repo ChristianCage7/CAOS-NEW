@@ -10,7 +10,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Autor</label>
-            <input type="text" class="form-control" value="{{ noticia.id_usuario }}" readonly>
+            <!-- Muestra el nombre completo del autor o el nombre de usuario si no hay nombre completo -->
+            <input type="text" class="form-control" value="{{ noticia.usuario.get_full_name|default:noticia.usuario.username }}" readonly>
         </div>
         <div class="mb-3">
             <label class="form-label">Fecha</label>
