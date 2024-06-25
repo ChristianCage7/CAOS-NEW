@@ -18,7 +18,6 @@ urlpatterns = [
     path('politica/', views.cat_politica, name='cat_politica'),
     path('quienes-somos/', views.quienes_somos, name='quienes_somos'),
     path('planes/', views.planes, name='planes'),
-    path('form_noticia/', views.form_noticia, name='form_noticia'),
     path('users/', views.user_list, name='user_list'),
     path('users/add/', views.user_add, name='user_add'),
     path('users/<int:pk>/edit/', views.user_edit, name='user_edit'),
@@ -27,6 +26,8 @@ urlpatterns = [
     path('noticias/edit/<int:pk>/', views.noticias_edit, name='noticias_edit'),
     path('noticias_eliminar/<int:pk>/', views.noticias_eliminar, name='noticias_eliminar'),
     path('revision_noticias/<int:pk>/', views.revision_noticias, name='revision_noticias'),
+    path('noticias/aprobar/<int:pk>/', views.aprobar_noticia, name='aprobar_noticia'),
+    path('noticias/rechazar/<int:pk>/', views.rechazar_noticia, name='rechazar_noticia'),
 ]
 
 if settings.DEBUG:

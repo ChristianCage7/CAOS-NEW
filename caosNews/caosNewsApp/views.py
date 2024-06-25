@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .form import NoticiaForm
+from .form import NoticiaForm, UserEditForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Noticia
-from .form import NoticiaForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -20,10 +20,10 @@ def base(request):
 
 def crud_noticia(request):
     if request.user.is_staff:
-        noticias = Noticia.objects.filter(estado=1)
+        noticias = Noticia.objects.all().order_by('-fecha')
         title = "Moderación de Noticias"
     else:
-        noticias = Noticia.objects.filter(estado=1, usuario=request.user)
+        noticias = Noticia.objects.filter(usuario=request.user)
         title = "Tus Noticias"
     return render(request, 'caosNewsApp/crud_noticia.html', {'noticias': noticias, 'title': title})
 
@@ -55,8 +55,6 @@ def quienes_somos(request):
 def planes(request):
     return render(request, 'caosNewsApp/planes.html')
 
-def form_noticia(request):
-    return render(request, 'caosNewsApp/form_noticia.html')
 
 def user_list(request):
     users = User.objects.all()
@@ -95,7 +93,9 @@ def noticias_add(request):
     if request.method == 'POST':
         form = NoticiaForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            noticia = form.save(commit=False)
+            noticia.usuario = request.user  # Asigna el usuario actualmente logueado a la noticia.
+            noticia.save()
             messages.success(request, "Noticia agregada exitosamente.")
             return redirect('crud_noticia')
     else:
@@ -142,14 +142,36 @@ def user_logout(request):
     logout(request)
     return redirect('index')
 
+
 def user_edit(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=user)
+        form = UserEditForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario actualizado exitosamente.")
             return redirect('user_list')
     else:
-        form = UserChangeForm(instance=user)
+        form = UserEditForm(instance=user)
     return render(request, 'caosNewsApp/user_edit.html', {'form': form, 'user': user})
+
+
+def aprobar_noticia(request, pk):
+    if not request.user.is_staff:
+        return HttpResponseRedirect(reverse('index'))  # Redirigir si no es administrador
+    noticia = get_object_or_404(Noticia, pk=pk)
+    noticia.estado = 1  # Cambiar el estado a activo
+    noticia.save()
+    messages.success(request, f"Noticia '{noticia.titulo}' aprobada con éxito.")
+    return HttpResponseRedirect(reverse('crud_noticia'))
+
+def rechazar_noticia(request, pk):
+    if not request.user.is_staff:
+        messages.error(request, "Acceso denegado.")
+        return redirect('index')
+    noticia = get_object_or_404(Noticia, pk=pk)
+    noticia.estado = 2  # Cambiar el estado a "Rechazada"
+    noticia.save()
+    messages.success(request, f"Noticia '{noticia.titulo}' ha sido rechazada.")
+    return redirect('crud_noticia')
+

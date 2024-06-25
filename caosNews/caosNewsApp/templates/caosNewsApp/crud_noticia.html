@@ -12,6 +12,7 @@
                 <th>Fecha</th>
                 <th>Ubicación</th>
                 <th>Categoría</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ noticia.fecha|date:"Y-m-d" }}</td>
                 <td>{{ noticia.ubicacion }}</td>
                 <td>{{ noticia.categoria.categoria }}</td>
+                <td>{{ noticia.get_estado_display }}</td>
                 <td>
                     <a href="{% url 'noticias_edit' noticia.id_noticia %}" class="btn btn-primary">Editar</a>
                     {% if request.user.is_staff %}

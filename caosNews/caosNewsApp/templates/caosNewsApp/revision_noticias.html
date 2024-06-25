@@ -38,8 +38,8 @@
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{% url 'crud_noticia' %}" class="btn btn-secondary">Volver</a>
-            <button type="button" class="btn btn-success">Aprobar</button>
-            <button type="button" class="btn btn-danger">Rechazar</button>
+            <a href="{% url 'aprobar_noticia' noticia.id_noticia %}" class="btn btn-success">Aprobar</a>
+            <a href="{% url 'rechazar_noticia' noticia.id_noticia %}" class="btn btn-danger">Rechazar</a>
         </div>
     </form>
 </div>

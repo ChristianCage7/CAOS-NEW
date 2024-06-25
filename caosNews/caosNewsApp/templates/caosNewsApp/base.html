@@ -53,15 +53,14 @@
             {% endif %}
 
             <!-- Usuario -->
-            {% if not request.user.is_staff %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+            {% if request.user.is_authenticated and not request.user.is_staff %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ request.user.first_name|default:request.user.username }}
+                </a>
                 <ul class="dropdown-menu">
                   <li>
                     <a class="dropdown-item" href="{% url 'crud_noticia' %}">Tus noticias</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="">Tú perfil</a>
                   </li>
                 </ul>
               </li>
