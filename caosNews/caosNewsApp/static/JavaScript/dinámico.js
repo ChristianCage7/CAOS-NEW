@@ -160,12 +160,9 @@
     
     // Footer Dinámico
     document.addEventListener("DOMContentLoaded", function() {
-      // Seleccionar el contenedor del footer
       var footerContainer = document.getElementById('footer-container');
     
-      // Verificar si el contenedor existe
       if(footerContainer) {
-        // Definir el HTML del footer
         var footerHTML = `
           <footer class="footer bg-dark text-center py-3">
             <div class="container">
@@ -176,7 +173,6 @@
           </footer>
         `;
     
-        // Insertar el footer en el contenedor
         footerContainer.innerHTML = footerHTML;
       }
     });
